@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "pocket-tools",
+    "name": "Pocket Tools",
     "slug": "pocket-tools",
     "version": "1.0.0",
+    "description": "Ferramentas e calculadoras úteis para o dia a dia.",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -10,6 +11,8 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.felhipebrito.pockettools",
+      "versionCode": 1,
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/android-icon-foreground.png",
