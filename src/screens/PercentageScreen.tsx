@@ -70,6 +70,14 @@ export function PercentageScreen() {
     setCalculation({ value, percentage, ...results });
   }
 
+  function handleClear() {
+    Keyboard.dismiss();
+    setValueInput('');
+    setPercentageInput('');
+    setCalculation(null);
+    setError(null);
+  }
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -108,17 +116,33 @@ export function PercentageScreen() {
             </Text>
           ) : null}
 
-          <Pressable
-            accessibilityRole="button"
-            accessibilityLabel="Calcular porcentagem"
-            onPress={handleCalculate}
-            style={({ pressed }) => [
-              styles.button,
-              pressed && styles.buttonPressed,
-            ]}
-          >
-            <Text style={styles.buttonText}>Calcular</Text>
-          </Pressable>
+          <View style={styles.actions}>
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Calcular porcentagem"
+              onPress={handleCalculate}
+              style={({ pressed }) => [
+                styles.button,
+                styles.primaryButton,
+                pressed && styles.buttonPressed,
+              ]}
+            >
+              <Text style={styles.primaryButtonText}>Calcular</Text>
+            </Pressable>
+
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Limpar cálculo de porcentagem"
+              onPress={handleClear}
+              style={({ pressed }) => [
+                styles.button,
+                styles.secondaryButton,
+                pressed && styles.buttonPressed,
+              ]}
+            >
+              <Text style={styles.secondaryButtonText}>Limpar</Text>
+            </Pressable>
+          </View>
         </View>
 
         {calculation ? (
@@ -173,18 +197,35 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600',
   },
+  actions: {
+    flexDirection: 'row',
+    gap: spacing.md,
+  },
   button: {
+    flex: 1,
     minHeight: 52,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.primary,
     borderRadius: radius.md,
+  },
+  primaryButton: {
+    backgroundColor: colors.primary,
+  },
+  secondaryButton: {
+    backgroundColor: colors.surface,
+    borderWidth: 1,
+    borderColor: colors.primary,
   },
   buttonPressed: {
     opacity: 0.8,
   },
-  buttonText: {
+  primaryButtonText: {
     color: colors.surface,
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  secondaryButtonText: {
+    color: colors.primary,
     fontSize: 16,
     fontWeight: '700',
   },
